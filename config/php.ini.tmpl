@@ -168,7 +168,7 @@
 ;;;;;;;;;;;;;;;;;;;;
 ; Language Options ;
 ;;;;;;;;;;;;;;;;;;;;
-{{ default .Env.VERSION "0.1.2" }}
+
 ; Enable the PHP scripting language engine under Apache.
 ; http://php.net/engine
 engine = {{ default .Env.PHPINI_ENGINE "On" }}
@@ -640,7 +640,7 @@ report_memleaks = {{ default .Env.PHPINI_REPORT_MEMLEAKS "On" }}
 ; Development Value: "GPCS"
 ; Production Value: "GPCS";
 ; http://php.net/variables-order
-variables_order = {{ default .Env.PHPINI_VARIABLES_ORDER "\"GPCS\"" }}
+variables_order = "{{ default .Env.PHPINI_VARIABLES_ORDER "GPCS" }}"
 
 ; This directive determines which super global data (G,P & C) should be
 ; registered into the super global array REQUEST. If so, it also determines
@@ -653,7 +653,7 @@ variables_order = {{ default .Env.PHPINI_VARIABLES_ORDER "\"GPCS\"" }}
 ; Development Value: "GP"
 ; Production Value: "GP"
 ; http://php.net/request-order
-request_order = {{ default .Env.PHPINI_REQUEST_ORDER "\"GP\"" }}
+request_order = "{{ default .Env.PHPINI_REQUEST_ORDER "GP" }}"
 
 ; This directive determines whether PHP registers $argv & $argc each time it
 ; runs. $argv contains an array of all the arguments passed to PHP when a script
@@ -706,11 +706,11 @@ auto_append_file =
 ;
 ; PHP's built-in default media type is set to text/html.
 ; http://php.net/default-mimetype
-default_mimetype = {{ default .Env.PHPINI_DEFAULT_MIMETYPE "\"text/html\"" }}
+default_mimetype = "{{ default .Env.PHPINI_DEFAULT_MIMETYPE "text/html" }}"
 
 ; PHP's default character set is set to UTF-8.
 ; http://php.net/default-charset
-default_charset = {{ default .Env.PHPINI_DEFAULT_CHARSET "\"UTF-8\"" }}
+default_charset = "{{ default .Env.PHPINI_DEFAULT_CHARSET "UTF-8" }}"
 
 ; PHP internal character encoding is set to empty.
 ; If empty, default_charset is used.
@@ -1477,7 +1477,7 @@ session.sid_length = {{ default .Env.PHPINI_SESSION_SID_LENGTH "26" }}
 ; Development Value: "a=href,area=href,frame=src,form="
 ; Production Value: "a=href,area=href,frame=src,form="
 ; http://php.net/url-rewriter.tags
-session.trans_sid_tags = {{ default .Env.PHPINI_SESSION_TRANS_SID_TAGS "\"a=href,area=href,frame=src,form=\"" }}
+session.trans_sid_tags = "{{ default .Env.PHPINI_SESSION_TRANS_SID_TAGS "a=href,area=href,frame=src,form=" }}"
 
 ; URL rewriter does not rewrite absolute URLs by default.
 ; To enable rewrites for absolute paths, target hosts must be specified
@@ -1743,7 +1743,7 @@ soap.wsdl_cache_enabled = {{ default .Env.PHPINI_SOAP_WSDL_CACHE_ENABLED "1" }}
 
 ; Sets the directory name where SOAP extension will put cache files.
 ; http://php.net/soap.wsdl-cache-dir
-soap.wsdl_cache_dir={{ default .Env.PHPINI_SOAP_WSDL_CACHE_DIR "\"/tmp\"" }}
+soap.wsdl_cache_dir="{{ default .Env.PHPINI_SOAP_WSDL_CACHE_DIR "/tmp" }}"
 
 ; (time to live) Sets the number of second while cached file will be used
 ; instead of original one.
