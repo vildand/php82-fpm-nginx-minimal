@@ -4,8 +4,9 @@ FROM php:7.4-fpm-alpine
 
 COPY --from=addon_dockerize /usr/local/bin/dockerize /usr/local/bin/dockerize
 COPY --from=addon_healthcheck /usr/local/bin/php-fpm-healthcheck /usr/local/bin/php-fpm-healthcheck
-COPY status.conf /usr/local/etc/php-fpm.d/status.conf
-COPY www.conf.tmpl /usr/local/etc/php-fpm.d/www.conf.tmpl
+COPY config/status.conf /usr/local/etc/php-fpm.d/status.conf
+COPY config/www.conf.tmpl /usr/local/etc/php-fpm.d/www.conf.tmpl
+COPY config/php.ini.tmpl /usr/local/etc/php/php.ini.tmpl
 COPY entrypoint.sh /entrypoint.sh
 
 RUN apk update \
@@ -15,9 +16,7 @@ RUN apk update \
     && docker-php-ext-enable opcache\
     && apk del --purge .build-deps \
     && adduser -D -u 1000 non-privileged \
-    && chown -R 1000:1000 /usr/local/etc/php-fpm.d \
-    # Use the default production configuration
-    && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+    && chown -R 1000:1000 /usr/local
 
 USER 1000
 
