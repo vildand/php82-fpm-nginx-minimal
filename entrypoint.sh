@@ -18,10 +18,7 @@ else
   echo "STATIC_FILES_PATH ${STATIC_FILES_PATH} does not exist. Remember to mount a volume on the path."
 fi
 
-# Template www.conf for php-fpm
+## Template www.conf for php-fpm
 dockerize -template /usr/local/etc/php-fpm.d/www.conf.tmpl:/usr/local/etc/php-fpm.d/www.conf
-
-# Template php.ini for php
-dockerize -template /usr/local/etc/php/php.ini.tmpl:/usr/local/etc/php/php.ini
 
 exec "/usr/local/bin/docker-php-entrypoint" "$@"
