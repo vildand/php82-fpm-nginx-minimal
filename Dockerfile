@@ -15,7 +15,8 @@ RUN apk update \
     && adduser -D -u 1000 non-privileged \
     && chown -R 1000:1000 /usr/local
 
-COPY www.conf.tmpl /usr/local/etc/php-fpm.d/www.conf.tmpl
+COPY conf/www.conf.tmpl /usr/local/etc/php-fpm.d/www.conf.tmpl
+COPY conf/php.ini.tmpl /usr/local/etc/php/php.ini.tmpl
 COPY entrypoint.sh /entrypoint.sh
 RUN apk update && apk add --no-cache dos2unix \
     && dos2unix /usr/local/etc/php-fpm.d/www.conf.tmpl /entrypoint.sh \
