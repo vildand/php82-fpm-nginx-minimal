@@ -5,11 +5,10 @@ FROM php:7.4-fpm-alpine
 COPY --from=addon_dockerize /usr/local/bin/dockerize /usr/local/bin/dockerize
 COPY --from=addon_healthcheck /usr/local/bin/php-fpm-healthcheck /usr/local/bin/php-fpm-healthcheck
 
-
 RUN apk update \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && apk add --no-cache git zip postgresql-dev libxslt-dev fcgi openssl tini bash\
-    && docker-php-ext-install pdo_pgsql pgsql xsl soap\
+    && docker-php-ext-install pdo_pgsql pgsql xsl soap sockets\
     && docker-php-ext-enable opcache\
     && apk del --purge .build-deps \
     && adduser -D -u 1000 non-privileged \
