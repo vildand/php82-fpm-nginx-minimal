@@ -1,0 +1,2 @@
+# The * text=auto option tells Git to only normalize line endings to LF for all text files
+* text=auto
