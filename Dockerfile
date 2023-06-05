@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM europe-west1-docker.pkg.dev/prj-cp-mgmt-compute/container-images/upstream/php:7.4-fpm-alpine
 
 # SANE DEFAULTS
 ENV PHPFPM_CATCH_WORKERS_OUTPUT=yes
