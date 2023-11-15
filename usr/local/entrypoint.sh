@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-set -x
+set -e
 
 # Static files handling
 if [[ -z "${STATIC_FILES_PATH}" ]]; then

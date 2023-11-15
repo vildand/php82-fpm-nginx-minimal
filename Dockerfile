@@ -1,19 +1,22 @@
-FROM europe-west1-docker.pkg.dev/prj-cp-mgmt-compute/container-images/upstream/php:7.4-fpm-alpine
+FROM php:8.1.26RC1-fpm
 
 # SANE DEFAULTS
-ENV PHPFPM_CATCH_WORKERS_OUTPUT=yes
-ENV PHPFPM_DECORATE_WORKERS_OUTPUT=no
-ENV PHPFPM_CLEAR_ENV=no
-ENV PHPINI_EXPOSE_PHP=no
+ENV PHPINI_EXPOSE_PHP=Off
+ENV PHPINI_VARIABLES_ORDER=EGPCS
+ENV PHPFPM_PROCESS_CONTROL_TIMEOUT: 10s
+ENV PHPFPM_ACCESS_LOG: /dev/null
+ENV PHPFPM_PM: static
 
 COPY usr /usr
 
-RUN apk --update add --no-cache git zip postgresql-dev libxslt-dev fcgi openssl tini bash \
+RUN apt update  \
+    && apt install -y libpq-dev libxslt-dev git zip openssl tini bash \
     && docker-php-ext-install pdo_pgsql pgsql xsl soap sockets \
     && docker-php-ext-enable opcache \
-    && chown -R nobody:nobody /usr/local
+    && apt autoremove && apt clean \
+    && chown -R www-data:www-data /usr/local
 
-USER nobody
+USER www-data
 
-ENTRYPOINT [ "/sbin/tini", "--", "/usr/local/entrypoint.sh" ]
+ENTRYPOINT [ "tini", "--", "/usr/local/entrypoint.sh" ]
 CMD [ "php-fpm" ]

@@ -1,0 +1,11 @@
+services:
+  phpfpm:
+    build: ..
+    volumes:
+      - ./index.php:/usr/local/www/index.php;
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
