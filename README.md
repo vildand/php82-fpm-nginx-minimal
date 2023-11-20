@@ -1,5 +1,5 @@
-# CPD Official PHP-FPM repository  
-This library serves as baseimage for php applications in Cellpoint Digital.  
+# Minimal php8.2/fpm/nginx setup
+
 All configs can be modified by env variables. See https://github.com/jwilder/dockerize.  
 
 See all configs available in:
@@ -22,10 +22,3 @@ This project includes two 3rd party utilities as binaries:
 * https://github.com/renatomefi/php-fpm-healthcheck (used for kubernetes healthcheck and readiness probe)
   
 They can be found in usr/local/bin and is maintained directly in the repo for build consistency.
-
-## Optimization links
-https://www.scalingphpbook.com/blog/2014/02/14/best-zend-opcache-settings.html :
-
-https://geekflare.com/php-fpm-optimization/
-
-https://haydenjames.io/php-fpm-tuning-using-pm-static-max-performance/
